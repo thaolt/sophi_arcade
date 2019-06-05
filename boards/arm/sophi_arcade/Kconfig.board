@@ -1,0 +1,4 @@
+
+config BOARD_SOPHI_ARCADE
+	bool "STM32F407VET6 Development Board"
+	depends on SOC_STM32F407XG

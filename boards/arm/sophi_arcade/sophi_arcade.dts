@@ -1,0 +1,96 @@
+/*
+ * Copyright (c) 2017 Linaro Limited
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/dts-v1/;
+
+#include <mem.h>
+#include <st/f4/stm32f407.dtsi>
+
+/ {
+	model = "SONGPHI Arcade board";
+	compatible = "st,stm32f407";
+
+	ccm0: memory@10000000 {
+		compatible = "st,stm32-ccm";
+		reg = <0x10000000 DT_SIZE_K(64)>;
+	};
+
+	sram0: memory@20000000 {
+		reg = <0x20000000 DT_SIZE_K(128)>;
+	};
+
+	soc {
+		flash-controller@40023c00 {
+			flash0: flash@8000000 {
+				reg = <0x08000000 DT_SIZE_K(512)>;
+			};
+		};
+	};
+
+	chosen {
+		zephyr,console = &usart1;
+		zephyr,shell-uart = &usart1;
+		zephyr,sram = &sram0;
+		zephyr,flash = &flash0;
+		zephyr,ccm = &ccm0;
+	};
+
+	leds {
+		compatible = "gpio-leds";
+		led_2: led_2 {
+			gpios = <&gpioa 6 GPIO_INT_ACTIVE_HIGH>;
+			label = "User LD2";
+		};
+		led_3: led_3 {
+			gpios = <&gpioa 7 GPIO_INT_ACTIVE_HIGH>;
+			label = "User LD3";
+		};
+	};
+
+	gpio_keys {
+		compatible = "gpio-keys";
+
+		k0_button: k0_button {
+			label = "Key0";
+			gpios = <&gpioe 4 GPIO_INT_ACTIVE_LOW>;
+		};
+
+		k1_button: k1_button {
+			label = "Key1";
+			gpios = <&gpioe 3 GPIO_INT_ACTIVE_LOW>;
+		};
+	};
+
+	aliases {
+		led0 = &led_2;
+		led1 = &led_3;
+		sw0 = &k0_button;
+		sw1 = &k1_button;
+	};
+};
+
+&usart1 {
+	current-speed = <115200>;
+	pinctrl-0 = <&usart1_pins_a>;
+	pinctrl-names = "default";
+	status = "ok";
+};
+
+&timers2 {
+	status = "ok";
+
+	pwm {
+		status = "ok";
+	};
+};
+
+&rtc {
+	status = "ok";
+};
+
+&usbotg_fs {
+	status = "ok";
+};
