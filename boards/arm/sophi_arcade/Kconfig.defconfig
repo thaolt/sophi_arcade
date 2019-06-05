@@ -10,18 +10,15 @@ if BOARD_SOPHI_ARCADE
 config BOARD
 	default "stm32f4_disco"
 
-if UART_CONSOLE
-
 config UART_2
 	default y
-
-endif # UART_CONSOLE
-
-if PWM
 
 config PWM_STM32_2
 	default y
 
-endif # PWM
+config SPI_1
+	default y
+config SPI_2
+	default y
 
 endif # BOARD_SOPHI_ARCADE
