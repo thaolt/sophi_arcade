@@ -1,9 +1,3 @@
-/*
- * Copyright (c) 2017 Linaro Limited
- *
- * SPDX-License-Identifier: Apache-2.0
- */
-
 /dts-v1/;
 
 #include <mem.h>
@@ -86,7 +80,7 @@
 
 &spi2 {
     status = "ok";
-    cs-gpios = <&gpioe 0 0>;
+    cs-gpios = <&gpiob 10 0>;
 
     sdhc0: sdhc@0 {
         compatible = "zephyr,mmc-spi-slot";
