@@ -10,9 +10,39 @@ config UART_2
 config PWM_STM32_2
 	default y
 
+config SPI
+	default y
 config SPI_1
 	default y
-config SPI_2
+
+config FLASH
 	default y
+
+config SPI_FLASH_W25QXXDV
+	default y
+
+config SPI_FLASH_W25QXXDV_GPIO_SPI_CS
+	default y
+
+config DISK_ACCESS_FLASH
+	default y
+
+config DISK_FLASH_DEV_NAME
+	default SPI_FLASH_W25QXXDV_DRV_NAME
+
+config DISK_FLASH_START
+	default 0x0
+
+config DISK_FLASH_MAX_RW_SIZE
+	default 256
+
+config DISK_ERASE_BLOCK_SIZE
+	default 0x1000
+
+config DISK_FLASH_ERASE_ALIGNMENT
+	default 0x1000
+
+config DISK_VOLUME_SIZE
+	default 0x200000
 
 endif # BOARD_SOPHI_ARCADE
